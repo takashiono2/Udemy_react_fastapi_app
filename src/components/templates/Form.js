@@ -1,14 +1,19 @@
 import React from 'react'
 
 const Form = () => {
-  const [name, setName] = React.useState('');
-  const [age, setAge] = React.useState(0);
+  const [form, setForm] = React.useState({
+    name: '',
+    age: ''
+  });
   const handleInputChange = (event) => {
-    setName(event.target.value);
+    // setForm(event.target.value);
+    const { name, value } = event.target;
+    setForm((prevForm) => ({
+      ...prevForm,
+      [name]: value
+    }))
   }
-  const handleAgeChange = (event) => {
-    setAge(event.target.value);
-  }
+
   return (
     <div>
       <form>
@@ -18,14 +23,14 @@ const Form = () => {
             id="name"
             type="text"
             name="name"
-            value={name}
+            value={form.name}
             onChange={handleInputChange}
           />
         </label>
         <br />
         <label htmlFor='age'>
           年齢
-          <select name="" id="age" onChange={handleAgeChange}>
+          <select name="age" id="age" onChange={handleInputChange}>
             <option value={10}>10代</option>
             <option value={20}>20代</option>
             <option value={30}>30代</option>
@@ -33,8 +38,8 @@ const Form = () => {
         </label>
       </form>
       <p>確認用</p>
-      <p>{name}</p>
-      <p>{age}</p>
+      <p>{form.name}</p>
+      <p>{form.age}</p>
     </div>
   )
 }
