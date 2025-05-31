@@ -1,9 +1,12 @@
 import React from 'react'
+import { Link, useNavigate } from 'react-router-dom';
 
 const Form = () => {
   const [form, setForm] = React.useState({
     name: '',
-    age: ''
+    age: '',
+    gender: '',
+    comment: '',
   });
   const handleInputChange = (event) => {
     // setForm(event.target.value);
@@ -12,6 +15,16 @@ const Form = () => {
       ...prevForm,
       [name]: value
     }))
+  }
+
+  const navigate = useNavigate();
+
+  const gotoResult = () => {
+    navigate('/result')
+  }
+
+  const handleSubmit = (event) => {
+    gotoResult();
   }
 
   return (
@@ -36,10 +49,48 @@ const Form = () => {
             <option value={30}>30代</option>
           </select>
         </label>
+        <br />
+        性別
+        <input
+          type="radio"
+          name="gender"
+          id="male"
+          value="male"
+          onChange={handleInputChange}
+        />
+        男性
+        <input
+          type="radio"
+          name="gender"
+          id="female"
+          value="female"
+          onChange={handleInputChange}
+        />
+        女性
+        <input
+          type="radio"
+          name="gender"
+          id="other"
+          value="other"
+          onChange={handleInputChange}
+        />
+        その他
+        <br />
+        <label htmlFor='comment'>コメント
+          <textarea
+            name="comment"
+            placeholder="コメントを入力してください"
+            value={form.comment}
+            onChange={handleInputChange}
+          >
+          </textarea>
+        </label>
       </form>
-      <p>確認用</p>
-      <p>{form.name}</p>
-      <p>{form.age}</p>
+      button
+      <button
+        onClick={handleSubmit}
+      >送信</button>
+      <Link to="/result">結果ページへ</Link>
     </div>
   )
 }
