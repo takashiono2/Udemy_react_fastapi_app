@@ -23,7 +23,6 @@ const Login = () => {
     login(user);
   }
 
-
   return (
     <>
       <Container maxWidth="xs">
@@ -39,13 +38,12 @@ const Login = () => {
             ログイン画面
           </Typography>
 
-
           <TextField
             required
             label="名前"
             margin='normal'
             name="username"
-            id="password"
+            id="username"
             autoComplete='current-password'
             fullWidth
             onChange={handleChange}
@@ -67,7 +65,7 @@ const Login = () => {
             sx={{ mt: 3, mb: 2 }}
             onClick={onClickLogin}
           >ログイン</Button>
-          <Link to="register">新規登録はこちら</Link>
+          <Link to="/register">新規登録はこちら</Link>
 
         </Box>
       </Container>

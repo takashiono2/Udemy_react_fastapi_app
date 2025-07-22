@@ -9,22 +9,30 @@ export const useLogin = () => {
   const navigate = useNavigate()
 
   const login = (user) => {
-    const endpoint = 'https://jsonplaceholder.typicode.com/users'
-    const queries = { username: user.username, id: user.password }
+    const endpoint = 'http://127.0.0.1:8000/users'
+    const queries = { name: user.username, password: user.password }
     axios.get(endpoint, { params: queries })
       .then(response => {
-        if (response.data[0] === undefined) {
-          navigate("/loginfailed")
-        } else {
-          setLoginUser(response.data[0].username)
+        console.log("response.data" + JSON.stringify(response.data));
+        console.log(response.data[0]);
+        if (Object.keys(response.data).length > 0) {
+          console.log("ログイン成功");
+          setLoginUser(user.username)
           setIsLogined(true);
           navigate("/", { state: { username: "ABC" } })
+        } else {
+          console.log("ログイン失敗");
+          navigate("/loginfailed")
         }
       })
+      .catch((e) => {
+        console.error("ログイン失敗", e);
+        setLoginUser({ username: "", password: "" })
+        navigate("/loginfailed")
+      })
   }
-  return (
-    <div>{login}</div>
-  )
-}
 
-export default useLogin
+  return { login };
+};
+
+export default useLogin;

@@ -67,7 +67,7 @@ const Login = () => {
             sx={{ mt: 3, mb: 2 }}
             onClick={onClickLogin}
           >ログイン</Button>
-          <Link to="register">新規登録はこちら</Link>
+          <Link to="/register">新規登録はこちら</Link>
 
         </Box>
       </Container>
